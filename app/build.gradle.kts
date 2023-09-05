@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+    implementation ("com.github.denzcoskun:ImageSlideshow:0.1.2")
     implementation ("com.airbnb.android:lottie:3.7.0")
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
