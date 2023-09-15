@@ -28,7 +28,42 @@ class CartAdapter(private val cartItems:MutableList<String>, private val cartIte
                 cartPrice.text = cartItemsPrice[position]
                 cartImage.setImageResource(CartImage[position])
                 cartItemQuantity.text = quantity.toString()
+
+                //Button Actions :
+                buttonMinus.setOnClickListener{
+                    decreaseQuantity(position)
+                }
+                buttonAdd.setOnClickListener {
+                    increaseQuantity(position)
+                }
+                buttonTrash.setOnClickListener {
+                    val itemPosition = adapterPosition
+                    if(itemPosition != RecyclerView.NO_POSITION)
+                    deleteItem(itemPosition)
+                }
             }
+        }
+
+        fun increaseQuantity(position: Int){
+            if(itemQuantities[position] < 10){
+                itemQuantities[position]++
+                binding.cartItemQuantity.text = itemQuantities[position].toString()
+            }
+        }
+
+        fun decreaseQuantity(position: Int){
+            if(itemQuantities[position] > 1){
+                itemQuantities[position]--
+                binding.cartItemQuantity.text = itemQuantities[position].toString()
+            }
+        }
+
+        fun deleteItem(position: Int){
+            cartItems.removeAt(position)
+            cartItemsPrice.removeAt(position)
+            CartImage.removeAt(position)
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position,cartItems.size)
         }
 
     }
